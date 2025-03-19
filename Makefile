@@ -10,11 +10,11 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = #add .c files here
+SRCS_C = #add .c files here
 
 NAME = pipex
 
-LIBFT = $(LIBFT)/libft.a
+LIBFT = $(LIBFT_DIR)/libft.a
 
 LIBFT_DIR = ./inc/libft
 
@@ -32,7 +32,7 @@ SRCS_DIR = srcs/
 
 OBJS_DIR = objs/
 
-SRCS = $(addprefix $(SRCS_DIR), $(SRCS))
+SRCS = $(addprefix $(SRCS_DIR), $(SRCS_C))
 
 OBJS = $(addprefix $(OBJS_DIR),$(SRCS:.c=.o))
 
@@ -52,7 +52,7 @@ $(NAME): $(LIBFT) $(OBJS)
 clean:
 	@$(RM) $(OBJS)
 	@$(MAKE) -C $(LIBFT_DIR) clean --no-print-directory
-	@echo Clean all objs!
+	@echo Clean objs!
 
 fclean: clean
 	@$(RM) $(NAME) pipex
