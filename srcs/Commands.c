@@ -47,13 +47,13 @@ static int	prm_len(char const *str, char c)
 	return (i + 1);
 }
 
-static void fill_param(int *len, char **split, const char *str, int i)
+static void	fill_param(int *len, char **split, const char *str, int i)
 {
 	while (*str == ' ' && *str)
 		str++;
 	*len = prm_len(str, ' ');
 	if (*str && *str == '\'')
-		split[i] = ft_substr(str +1, 0 ,*len -3);
+		split[i] = ft_substr(str +1, 0, *len -3);
 	else
 		split[i] = ft_substr(str, 0, *len - 1);
 }
@@ -84,7 +84,7 @@ static int	count_p(char const *param, char c)
 	return (count);
 }
 
-char **Split_command(char const *input_str)
+char	**split_command(char const *inputstr)
 {
 	int		count;
 	int		i;
@@ -92,18 +92,18 @@ char **Split_command(char const *input_str)
 	char	**result;
 
 	i = 0;
-	if(!input_str)
-		return(NULL);
-	count = count_p(input_str, ' ');
+	if (!inputstr)
+		return (NULL);
+	count = count_p(inputstr, ' ');
 	result = malloc((count + 1) * sizeof(char *));
 	if (!result)
 		return (NULL);
 	while (i < count)
 	{
-		fill_param(&len, result, input_str, i);
+		fill_param(&len, result, inputstr, i);
 		if (!result[i++])
 			return (freesplit(result, count));
-		input_str += len;
+		inputstr += len;
 	}
 	result[i] = 0;
 	return (result);

@@ -14,14 +14,14 @@
 
 void	free_double_pointers(void **input, int max, int ctl)
 {
-	while(ctl <= max)
+	while (ctl <= max)
 		free(input[ctl++]);
 	free(input);
 }
 
 void	free_pipe(t_pipe *pipex, int status, int i, int x)
 {
-	while(status >= 6 &&pipex->env[++i])
+	while (status >= 6 && pipex->env[++i])
 		;
 	if (status >= 6)
 		free_double_pointers((void **)pipex->env, i, 0);
@@ -46,8 +46,8 @@ void	free_pipe(t_pipe *pipex, int status, int i, int x)
 
 void	exits(t_pipe *pipex, int type, int status)
 {
-	if(type == 1)
-		ft_printf("Incorrect format! accepted only:" 
+	if (type == 1)
+		ft_printf("Incorrect format! accepted only:"
 			"\" infile \"cmd1\" \"cmd2\" outfile \"\n");
 	else if (type == 2)
 		ft_printf("Allocation failure");

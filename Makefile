@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS_C = #add .c files here
+SRCS_C = Pipex.c Process.c Commands.c Clean_pipes.c
 
 NAME = pipex
 
@@ -26,21 +26,21 @@ CFLAGS = -Wall -Wextra -Werror -g
 
 CC = cc
 
-MAIN = main.c
-
 SRCS_DIR = srcs/
 
 OBJS_DIR = objs/
 
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_C))
 
-OBJS = $(addprefix $(OBJS_DIR),$(SRCS:.c=.o))
+OBJS = $(addprefix $(OBJS_DIR), $(SRCS_C:.c=.o))
 
 all: $(NAME)
 
-$(OBJS_DIR)/%.0: %.c
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(OBJS_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
-	@$(cc) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
