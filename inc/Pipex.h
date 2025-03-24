@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvon-ah- <gvon-ah-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gisrael <gisrael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:01:26 by gvon-ah-          #+#    #+#             */
-/*   Updated: 2025/03/20 17:59:27 by gvon-ah-         ###   ########.fr       */
+/*   Updated: 2025/03/22 22:19:57 by gisrael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_fds
 
 // Commands Parsing -----------------------------------------------------------
 
-char	**split_command(char const *input_str);
+char	**split_command(char const *input_str, int i);
 
 // Clean Pipex ----------------------------------------------------------------
 

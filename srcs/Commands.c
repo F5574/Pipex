@@ -3,34 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   Commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvon-ah- <gvon-ah-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gisrael <gisrael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 17:32:52 by gvon-ah-          #+#    #+#             */
-/*   Updated: 2025/03/19 14:38:26 by gvon-ah-         ###   ########.fr       */
+/*   Updated: 2025/03/22 22:21:46 by gisrael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/Pipex.h"
 
-static void	*freesplit(char **split, int fin)
+static void	*freesplit(char **split, int fin, int i)
 {
-	int	i;
-
-	i = 0;
 	while (i <= fin)
-	{
-		free(split[i]);
-		i++;
-	}
+		free(split[i++]);
 	free(split);
 	return (NULL);
 }
 
-static int	prm_len(char const *str, char c)
+static int	prm_len(char const *str, char c, int i)
 {
-	int	i;
-
-	i = 0;
 	if (str[i] == '\'')
 	{
 		i++;
@@ -44,25 +35,22 @@ static int	prm_len(char const *str, char c)
 		while (str[i] && str[i] != c)
 			i++;
 	}
-	return (i + 1);
+	return (++i);
 }
 
 static void	fill_param(int *len, char **split, const char *str, int i)
 {
 	while (*str == ' ' && *str)
 		str++;
-	*len = prm_len(str, ' ');
+	*len = prm_len(str, ' ', 0);
 	if (*str && *str == '\'')
-		split[i] = ft_substr(str +1, 0, *len -3);
+		split[i] = ft_substr(str +1, 0, *len - 3);
 	else
 		split[i] = ft_substr(str, 0, *len - 1);
 }
 
-static int	count_p(char const *param, char c)
+static int	count_p(char const *param, char c, int count)
 {
-	int	count;
-
-	count = 0;
 	while (*param)
 	{
 		while (*param == c && *param)
@@ -71,7 +59,7 @@ static int	count_p(char const *param, char c)
 		{
 			param++;
 			count++;
-			while (*param != '\'' && *param)
+			while (*param && *param != '\'')
 				param++;
 			while (*param != c && *param)
 				param++;
@@ -84,17 +72,15 @@ static int	count_p(char const *param, char c)
 	return (count);
 }
 
-char	**split_command(char const *inputstr)
+char	**split_command(char const *inputstr, int i)
 {
 	int		count;
-	int		i;
 	int		len;
 	char	**result;
 
-	i = 0;
 	if (!inputstr)
 		return (NULL);
-	count = count_p(inputstr, ' ');
+	count = count_p(inputstr, ' ', 0);
 	result = malloc((count + 1) * sizeof(char *));
 	if (!result)
 		return (NULL);
@@ -102,7 +88,7 @@ char	**split_command(char const *inputstr)
 	{
 		fill_param(&len, result, inputstr, i);
 		if (!result[i++])
-			return (freesplit(result, count));
+			return (freesplit(result, count, 0));
 		inputstr += len;
 	}
 	result[i] = 0;

@@ -1,0 +1,13 @@
+# test_text1.txt
+
+# Test 1: Check if the file `text1.txt` exists
+assert os.path.exists('text1.txt'), "File text1.txt does not exist."
+
+# Test 2: Check if the file `text1.txt` is not empty
+with open('text1.txt', 'r') as file:
+    content = file.read()
+assert content.strip() != "", "File text1.txt is empty."
+
+# Test 3: Check if the word 'cat' exists in the file
+assert 'cat' in content, "The word 'cat' is not found in text1.txt."
+-------------------------------------------------------------------

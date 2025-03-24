@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvon-ah- <gvon-ah-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gisrael <gisrael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 18:42:13 by gvon-ah-          #+#    #+#             */
-/*   Updated: 2025/03/20 18:33:06 by gvon-ah-         ###   ########.fr       */
+/*   Updated: 2025/03/22 22:20:32 by gisrael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	pipex_init(t_pipe **pipex, char	**argv, char **envp, int i)
 	(*pipex)->fd[1][1] = open(argv[4], O_WRONLY | O_TRUNC | O_CREAT, 0777);
 	if ((*pipex)->fd[1][1] == -1)
 		exits(*pipex, 3, 3);
-	(*pipex)->comm[0] = split_command(argv[2]);
-	(*pipex)->comm[1] = split_command(argv[3]);
+	(*pipex)->comm[0] = split_command(argv[2], 0);
+	(*pipex)->comm[1] = split_command(argv[3], 0);
 	if (!*((*pipex)->comm[0]) || !*((*pipex)->comm[1]))
 		exits(*pipex, 4, 4);
 	(*pipex)->envp = NULL;

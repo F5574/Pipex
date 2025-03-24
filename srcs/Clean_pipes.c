@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Clean_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvon-ah- <gvon-ah-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gisrael <gisrael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 17:04:56 by gvon-ah-          #+#    #+#             */
-/*   Updated: 2025/03/19 18:55:38 by gvon-ah-         ###   ########.fr       */
+/*   Updated: 2025/03/22 22:04:06 by gisrael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	free_double_pointers(void **input, int max, int ctl)
 
 void	free_pipe(t_pipe *pipex, int status, int i, int x)
 {
-	while (status >= 6 && pipex->env[++i])
+	while (status >= 6 && pipex->envp[++i])
 		;
 	if (status >= 6)
-		free_double_pointers((void **)pipex->env, i, 0);
+		free_double_pointers((void **)pipex->envp, i, 0);
 	if (status >= 6 && pipex->path[0])
 		free(pipex->path[0]);
-	if (status >= 6 && pipex->path[0])
-		free(pipex->path[0]);
+	if (status >= 6 && pipex->path[1])
+		free(pipex->path[1]);
 	while (status >= 4 && ++x <= 1)
 	{
 		i = -1;
