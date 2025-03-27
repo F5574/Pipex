@@ -6,7 +6,7 @@
 /*   By: gvon-ah- <gvon-ah-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 18:42:13 by gvon-ah-          #+#    #+#             */
-/*   Updated: 2025/03/27 16:00:39 by gvon-ah-         ###   ########.fr       */
+/*   Updated: 2025/03/27 20:19:42 by gvon-ah-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	pipex_init(t_pipe **pipex, char	**argv, char **envp, int i)
 			(*pipex)->envp = ft_split(envp[i] + 5, ':');
 	}
 	if (!(*pipex)->envp)
-		exits(*pipex, 5, 5);
+		(*pipex)->envp = ft_split("/bin:/usr/bin", ':');
 	paths(*pipex, 2, -1, -1);
 	(*pipex)->env = envp;
 }
@@ -99,6 +99,7 @@ void	child_p(t_fds fds, t_pipe *pipex, int i)
 		dup2(fds.input_w, STDOUT_FILENO);
 		if (fds.input_w != -1)
 			close(fds.input_w);
+		check_access(pipex, pipex->path[i]);
 		if (execve(pipex->path[i], pipex->comm[i], pipex->env) == -1)
 			exits(pipex, 9, 127);
 	}

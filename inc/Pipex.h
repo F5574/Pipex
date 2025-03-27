@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gisrael <gisrael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gvon-ah- <gvon-ah-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:01:26 by gvon-ah-          #+#    #+#             */
-/*   Updated: 2025/03/22 22:19:57 by gisrael          ###   ########.fr       */
+/*   Updated: 2025/03/27 20:20:49 by gvon-ah-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	**split_command(char const *input_str, int i);
 // Clean Pipex ----------------------------------------------------------------
 
 void	exits(t_pipe *pipex, int type, int status);
+void	check_access(t_pipe *pipex, char *path);
 
 // Process --------------------------------------------------------------------
 

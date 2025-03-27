@@ -6,7 +6,7 @@
 /*   By: gvon-ah- <gvon-ah-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 17:04:56 by gvon-ah-          #+#    #+#             */
-/*   Updated: 2025/03/27 15:07:59 by gvon-ah-         ###   ########.fr       */
+/*   Updated: 2025/03/27 20:20:25 by gvon-ah-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@ void	free_pipe(t_pipe *pipex, int status, int i, int x)
 	if (pipex->fd[1][1] != -1)
 		close(pipex->fd[1][1]);
 	free(pipex);
+}
+
+void	check_access(t_pipe *pipex, char *path)
+{
+	if (access(path, F_OK) == -1)
+		exits(pipex, 3, 127);
+	else if (access(path, X_OK) == -1)
+		exits(pipex, 3, 126);
 }
 
 void	exits(t_pipe *pipex, int type, int status)
