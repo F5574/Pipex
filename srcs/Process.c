@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gisrael <gisrael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gvon-ah- <gvon-ah-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 18:42:13 by gvon-ah-          #+#    #+#             */
-/*   Updated: 2025/03/22 22:20:32 by gisrael          ###   ########.fr       */
+/*   Updated: 2025/03/27 16:00:39 by gvon-ah-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@ char	*create_path(t_pipe *pipex, int x, int i)
 	char	*path;
 
 	temp = ft_strjoin(pipex->envp[i], "/");
-	path = ft_strjoin(temp, pipex->comm[x][0]);
-	if (temp)
+	if (!pipex->comm[x][0])
+		path = temp;
+	else
+		path = ft_strjoin(temp, pipex->comm[x][0]);
+	if (temp && temp != path)
 		free(temp);
 	if (!path)
 		exits(pipex, 6, 6);
@@ -54,12 +57,12 @@ void	pipex_init(t_pipe **pipex, char	**argv, char **envp, int i)
 	if (!pipex)
 		exits(*pipex, 2, 2);
 	(*pipex)->fd[0][0] = open(argv[1], O_RDONLY);
-	(*pipex)->fd[1][1] = open(argv[4], O_WRONLY | O_TRUNC | O_CREAT, 0777);
+	(*pipex)->fd[1][1] = open(argv[4], O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if ((*pipex)->fd[1][1] == -1)
 		exits(*pipex, 3, 3);
 	(*pipex)->comm[0] = split_command(argv[2], 0);
 	(*pipex)->comm[1] = split_command(argv[3], 0);
-	if (!*((*pipex)->comm[0]) || !*((*pipex)->comm[1]))
+	if (!*((*pipex)->comm[0]) && !*((*pipex)->comm[1]))
 		exits(*pipex, 4, 4);
 	(*pipex)->envp = NULL;
 	while (envp[++i] && !(*pipex)->envp)

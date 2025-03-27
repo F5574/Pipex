@@ -6,7 +6,7 @@
 /*   By: gvon-ah- <gvon-ah-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:52:20 by gvon-ah-          #+#    #+#             */
-/*   Updated: 2025/03/20 18:36:31 by gvon-ah-         ###   ########.fr       */
+/*   Updated: 2025/03/27 15:40:38 by gvon-ah-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv, char **envp)
 	int		status;
 	int		pipe_fd[2];
 
-	if (argc != 5 || !*argv[2] || !*argv[3])
+	if (argc != 5 || (!*argv[2] && !*argv[3]))
 		exits(NULL, 1, 1);
 	pipex_init(&pipex, argv, envp, -1);
 	if (pipe(pipe_fd) == -1)
@@ -37,3 +37,6 @@ int	main(int argc, char **argv, char **envp)
 		close(pipex->fd[0][0]);
 	exits(pipex, 10, status);
 }
+
+// valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s 
+//--trace-children=yes --track-fds=yes

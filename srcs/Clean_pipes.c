@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Clean_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gisrael <gisrael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gvon-ah- <gvon-ah-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 17:04:56 by gvon-ah-          #+#    #+#             */
-/*   Updated: 2025/03/22 22:04:06 by gisrael          ###   ########.fr       */
+/*   Updated: 2025/03/27 15:07:59 by gvon-ah-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,19 @@ void	exits(t_pipe *pipex, int type, int status)
 		ft_printf("Incorrect format! accepted only:"
 			"\" infile \"cmd1\" \"cmd2\" outfile \"\n");
 	else if (type == 2)
-		ft_printf("Allocation failure");
+		ft_printf("Allocation failure\n");
 	else if (type == 3)
-		perror("Open file in or out failure");
+		perror("Open file in or out failure\n");
 	else if (type == 4)
-		ft_printf("Allocation failure for commands");
+		ft_printf("Allocation failure for commands\n");
 	else if (type == 5 || type == 6)
-		ft_printf("Wrong path");
+		ft_printf("Wrong path\n");
 	else if (type == 7)
-		perror("Pipe failure");
+		perror("Pipe failure\n");
 	else if (type == 8)
-		perror("Fork failure");
+		perror("Fork failure\n");
 	else if (type == 9)
-		perror("Command not found");
+		perror("Command not found\n");
 	if (type > 2)
 		free_pipe(pipex, type, -1, -1);
 	exit(status);
